@@ -1,0 +1,2 @@
+suburban_garden_2k.hdr: CC0, Poly Haven (https://polyhaven.com/a/suburban_garden)
+field.hdr: supplied with the project

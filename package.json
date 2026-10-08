@@ -1,0 +1,32 @@
+{
+  "name": "archviz-demo",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "fetch-textures": "node scripts/fetch-textures.mjs",
+    "setup:erichlof": "node scripts/setup-erichlof.mjs",
+    "fetch-furniture": "node scripts/fetch-furniture.mjs",
+    "share:lan": "vite build && vite preview --host --port 4173"
+  },
+  "dependencies": {
+    "@tweakpane/plugin-essentials": "^0.2.1",
+    "n8ao": "^2.0.1",
+    "oidn-web": "^0.4.0",
+    "postprocessing": "^6.39.5",
+    "three": "^0.186.1",
+    "three-gpu-pathtracer": "^0.0.26",
+    "three-mesh-bvh": "^0.9.15",
+    "tweakpane": "^4.0.5"
+  },
+  "devDependencies": {
+    "@gltf-transform/core": "^4.5.1",
+    "@tweakpane/core": "^2.0.5",
+    "@types/three": "^0.186.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.3"
+  }
+}

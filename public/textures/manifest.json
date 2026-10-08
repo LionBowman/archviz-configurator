@@ -1,0 +1,152 @@
+{
+  "red_brick_03": {
+    "name": "Red brick",
+    "category": "Brick",
+    "displacement": true,
+    "maps": {
+      "albedo": "red_brick_03/albedo.jpg",
+      "normal": "red_brick_03/normal.jpg",
+      "roughness": "red_brick_03/roughness.jpg",
+      "ao": "red_brick_03/ao.jpg",
+      "height": "red_brick_03/height.jpg"
+    },
+    "size": [
+      1,
+      1
+    ]
+  },
+  "brick_wall_001": {
+    "name": "Buff brick",
+    "category": "Brick",
+    "displacement": true,
+    "maps": {
+      "albedo": "brick_wall_001/albedo.jpg",
+      "normal": "brick_wall_001/normal.jpg",
+      "roughness": "brick_wall_001/roughness.jpg",
+      "ao": "brick_wall_001/ao.jpg",
+      "height": "brick_wall_001/height.jpg"
+    },
+    "size": [
+      3,
+      3
+    ]
+  },
+  "red_bricks_04": {
+    "name": "Weathered brick",
+    "category": "Brick",
+    "displacement": true,
+    "maps": {
+      "albedo": "red_bricks_04/albedo.jpg",
+      "normal": "red_bricks_04/normal.jpg",
+      "roughness": "red_bricks_04/roughness.jpg",
+      "ao": "red_bricks_04/ao.jpg",
+      "height": "red_bricks_04/height.jpg"
+    },
+    "size": [
+      2.5,
+      2.5
+    ]
+  },
+  "white_plaster_02": {
+    "name": "White render",
+    "category": "Render",
+    "maps": {
+      "albedo": "white_plaster_02/albedo.jpg",
+      "normal": "white_plaster_02/normal.jpg",
+      "roughness": "white_plaster_02/roughness.jpg",
+      "ao": "white_plaster_02/ao.jpg"
+    },
+    "size": [
+      1,
+      1
+    ]
+  },
+  "painted_plaster_wall": {
+    "name": "Painted plaster",
+    "category": "Render",
+    "maps": {
+      "albedo": "painted_plaster_wall/albedo.jpg",
+      "normal": "painted_plaster_wall/normal.jpg",
+      "roughness": "painted_plaster_wall/roughness.jpg",
+      "ao": "painted_plaster_wall/ao.jpg"
+    },
+    "size": [
+      2,
+      2
+    ]
+  },
+  "exterior_wall_cladding": {
+    "name": "Timber cladding",
+    "category": "Timber",
+    "maps": {
+      "albedo": "exterior_wall_cladding/albedo.jpg",
+      "normal": "exterior_wall_cladding/normal.jpg",
+      "roughness": "exterior_wall_cladding/roughness.jpg",
+      "ao": "exterior_wall_cladding/ao.jpg"
+    },
+    "size": [
+      2,
+      2
+    ]
+  },
+  "japanese_cedar_planks": {
+    "name": "Cedar planks",
+    "category": "Timber",
+    "maps": {
+      "albedo": "japanese_cedar_planks/albedo.jpg",
+      "normal": "japanese_cedar_planks/normal.jpg",
+      "roughness": "japanese_cedar_planks/roughness.jpg",
+      "ao": "japanese_cedar_planks/ao.jpg"
+    },
+    "size": [
+      1.130000114440918,
+      1.130000114440918
+    ]
+  },
+  "roof_slates_02": {
+    "name": "Slate roof",
+    "category": "Roof",
+    "displacement": true,
+    "maps": {
+      "albedo": "roof_slates_02/albedo.jpg",
+      "normal": "roof_slates_02/normal.jpg",
+      "roughness": "roof_slates_02/roughness.jpg",
+      "ao": "roof_slates_02/ao.jpg",
+      "height": "roof_slates_02/height.jpg"
+    },
+    "size": [
+      3,
+      3
+    ]
+  },
+  "clay_roof_tiles_02": {
+    "name": "Clay roof tiles",
+    "category": "Roof",
+    "displacement": true,
+    "maps": {
+      "albedo": "clay_roof_tiles_02/albedo.jpg",
+      "normal": "clay_roof_tiles_02/normal.jpg",
+      "roughness": "clay_roof_tiles_02/roughness.jpg",
+      "ao": "clay_roof_tiles_02/ao.jpg",
+      "height": "clay_roof_tiles_02/height.jpg"
+    },
+    "size": [
+      2.5,
+      2.5
+    ]
+  },
+  "concrete_floor_01": {
+    "name": "Smooth concrete",
+    "category": "Concrete",
+    "maps": {
+      "albedo": "concrete_floor_01/albedo.jpg",
+      "normal": "concrete_floor_01/normal.jpg",
+      "roughness": "concrete_floor_01/roughness.jpg",
+      "ao": "concrete_floor_01/ao.jpg"
+    },
+    "size": [
+      2,
+      2
+    ]
+  }
+}

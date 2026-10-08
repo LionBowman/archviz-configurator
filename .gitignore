@@ -1,0 +1,9 @@
+# Dependencies and build output (GitHub Actions rebuilds dist/ on every push)
+node_modules/
+dist/
+*.log
+.DS_Store
+Thumbs.db
+
+# Downloaded assets in public/, Hdr/ and Models/ are intentionally committed so the
+# Pages build is self-contained (no fetch scripts needed).
