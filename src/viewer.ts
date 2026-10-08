@@ -14,6 +14,7 @@ import { Post, TONE_MODES, ToneMapName } from './post';
 import { computeSun, SunState } from './sun';
 import { toPhysical } from './materials';
 import { patchTransmissionSampling, tuneGlass } from './glass';
+import { patchShadowFiltering } from './shadows';
 
 /** All models in /Models are discovered at build time. */
 export const MODEL_FILES: Record<string, string> = Object.fromEntries(
@@ -96,6 +97,7 @@ export class Viewer {
 
   constructor(readonly container: HTMLElement) {
     patchTransmissionSampling();
+    patchShadowFiltering();
     const r = (this.renderer = new WebGLRenderer({ antialias: false, powerPreference: 'high-performance', stencil: false }));
     r.setPixelRatio(Math.min(devicePixelRatio, device.maxDpr));
     r.outputColorSpace = SRGBColorSpace;
