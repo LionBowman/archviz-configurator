@@ -121,7 +121,7 @@ export class Viewer {
 
     this.post = new Post(r, this.scene, this.camera);
     this.post.setFocusTarget(this.controls.target); // DOF autofocus follows the orbit / walk look-at point
-    if (device.touch || device.lowEnd) { this.post.setQuality('Low'); this.post.ao.configuration.halfRes = true; }
+    if (device.touch || device.lowEnd) { this.post.setQuality('Low'); this.post.ao.configuration.halfRes = true; this.post.settings.msaa = 2; this.post.rebuild(); }
 
     // Decoder/transcoder binaries are resolved + bundled by three itself (import.meta.url).
     const draco = new DRACOLoader();

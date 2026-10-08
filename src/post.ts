@@ -37,6 +37,9 @@ export class Post {
   settings = {
     ao: true, aoIntensity: 2.2, aoRadius: 1.2, aoQuality: 'Medium' as AOQuality,
     smaa: true,
+    /** Hardware multisampling of the scene render. Smooths thin sub-pixel slivers SMAA can't (e.g. the
+     *  model's flush, coplanar frame profiles, which otherwise shimmer as wavy lines). */
+    msaa: 4,
     bloom: true, bloomIntensity: 0.12, bloomThreshold: 0.92,
     dof: false, dofRange: 3, dofBokeh: 2,
     ca: false, caAmount: 0.6,
@@ -46,7 +49,7 @@ export class Post {
   };
 
   constructor(renderer: WebGLRenderer, private scene: Scene, private camera: Camera) {
-    this.composer = new EffectComposer(renderer, { frameBufferType: HalfFloatType });
+    this.composer = new EffectComposer(renderer, { frameBufferType: HalfFloatType, multisampling: Math.min(4, renderer.capabilities.maxSamples) });
     const { width, height } = renderer.getDrawingBufferSize(new Vector2());
     this.ao = new N8AOPostPass(scene, camera, width || 1, height || 1);
     this.ao.configuration.gammaCorrection = false;
@@ -96,6 +99,8 @@ export class Post {
   rebuild() {
     const s = this.settings;
     const c = this.composer;
+    const msaa = Math.min(s.msaa, c.getRenderer().capabilities.maxSamples); // e.g. 8× isn't available everywhere
+    if (c.multisampling !== msaa) c.multisampling = msaa;
     this.applyParams();
     c.removeAllPasses();
     c.addPass(new RenderPass(this.scene, this.camera));

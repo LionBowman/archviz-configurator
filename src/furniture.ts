@@ -16,6 +16,8 @@ interface Item {
   /** Height above the floor (e.g. a plant on a side table). */
   y?: number;
   size?: [number, number];
+  /** Uniform scale to bring a model to real-world proportions (Poly Haven pieces vary). */
+  scale?: number;
 }
 
 /** project.glb: floor at y = 0.15 m. Lounge in the bay end (+X), dining in the left wing (−X). */
@@ -25,17 +27,20 @@ const LAYOUTS: Record<string, { floorY: number; items: Item[] }> = {
     items: [
       // lounge
       { id: 'rug', x: 2.35, z: -0.35, size: [2.4, 1.7] },
-      { id: 'sofa_02', x: 2.35, z: -1.6 },
-      { id: 'coffee_table_round_01', x: 2.35, z: -0.2 },
-      { id: 'modern_arm_chair_01', x: 2.1, z: 1.35, ry: 180 },
+      // sofa ×1.15 → 2.08 m wide, 0.82 m high (a 3-seater); its back sits ~0.1 m off the wall
+      { id: 'sofa_02', x: 2.35, z: -1.57, scale: 1.15 },
+      // coffee table ×0.85 → Ø1.1 m, 0.42 m high
+      { id: 'coffee_table_round_01', x: 2.35, z: -0.25, scale: 0.85 },
+      // lounge chair ×0.95 → 0.97 m high, in proportion with the sofa
+      { id: 'modern_arm_chair_01', x: 2.1, z: 1.35, ry: 180, scale: 0.95 },
       { id: 'potted_plant_02', x: 3.25, z: 0.7 },
-      { id: 'side_table_01', x: 1.05, z: -1.75 },
-      { id: 'potted_plant_04', x: 1.05, z: -1.75, y: 0.55 },
-      // dining: four chairs on the diagonals, facing the table
-      { id: 'round_wooden_table_01', x: -1.6, z: -0.72 },
+      { id: 'side_table_01', x: 0.95, z: -1.75 },
+      { id: 'potted_plant_04', x: 0.95, z: -1.75, y: 0.55 },
+      // dining: table ×0.76 → Ø1.06 m, 0.76 m high (was a 1 m-high table); chairs tucked in on the diagonals
+      { id: 'round_wooden_table_01', x: -1.6, z: -0.72, scale: 0.76 },
       ...[45, 135, 225, 315].map((a) => {
         const t = (a * Math.PI) / 180;
-        return { id: 'dining_chair_02', x: -1.6 + 0.85 * Math.sin(t), z: -0.72 + 0.85 * Math.cos(t), ry: a + 180 };
+        return { id: 'dining_chair_02', x: -1.6 + 0.78 * Math.sin(t), z: -0.72 + 0.78 * Math.cos(t), ry: a + 180 };
       }),
     ],
   },
@@ -101,6 +106,7 @@ export class Furniture {
       if (!o) return;
       o.position.set(it.x, layout.floorY + (it.y ?? 0) + (it.id === 'rug' ? 0.004 : 0), it.z);
       o.rotation.y = ((it.ry ?? 0) * Math.PI) / 180;
+      if (it.scale) o.scale.setScalar(it.scale);
       this.group.add(o);
     });
     v.model.add(this.group); // pivot space = model metres

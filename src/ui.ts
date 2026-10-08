@@ -215,6 +215,7 @@ export function createUI(viewer: Viewer, ctx: UIContext): UI {
   bind(pl, s, 'bloomIntensity', { label: 'bloom amt', min: 0, max: 1, step: 0.01 }, { id: 'Post/bloomIntensity' }).on('change', live);
   bind(pl, s, 'bloomThreshold', { label: 'bloom threshold', min: 0.5, max: 1.5, step: 0.01 }, { id: 'Post/bloomThreshold' }).on('change', live);
   bind(pl, s, 'smaa', { label: 'SMAA' }, { id: 'Post/smaa' }).on('change', rebuild);
+  bind(pl, s, 'msaa', { label: 'MSAA', options: { off: 0, '2×': 2, '4×': 4, '8×': 8 } }, { id: 'Post/msaa' }).on('change', rebuild);
   // Lens: depth of field (autofocus on the orbit target / walk look point), chromatic aberration, vignette
   bind(pc, s, 'dof', { label: 'depth of field' }, { id: 'Post/dof' }).on('change', rebuild);
   bind(pc, s, 'dofRange', { label: 'focus range (m)', min: 0.2, max: 15, step: 0.1 }, { id: 'Post/dofRange' }).on('change', live);
