@@ -15,6 +15,7 @@ import { computeSun, SunState } from './sun';
 import { toPhysical } from './materials';
 import { patchTransmissionSampling, tuneGlass } from './glass';
 import { patchShadowFiltering } from './shadows';
+import { dropFlatNormalMaps } from './flatNormals';
 
 /** All models in /Models are discovered at build time. */
 export const MODEL_FILES: Record<string, string> = Object.fromEntries(
@@ -89,6 +90,7 @@ export class Viewer {
   };
 
   private dirty = 2;
+  private wasMoving = false;
   private interactingUntil = 0;
   private tween: Tween | null = null;
   private timer = new Timer();
@@ -197,6 +199,7 @@ export class Viewer {
     });
 
     upgraded.forEach((p, orig) => { if (p !== orig) orig.dispose(); tuneGlass(p as MeshPhysicalMaterial); });
+    dropFlatNormalMaps(new Set(upgraded.values()));
 
     // Normalise: scale, centre on XZ, rest on ground.
     const box = new Box3().setFromObject(pivot);
@@ -367,6 +370,9 @@ export class Viewer {
     if (stepping) this.markInteracting();
     // Orbit controls are switched off in walk mode (update() would snap the camera back to the orbit).
     if (this.controls.enabled && this.controls.update(dt)) this.markInteracting();
+    // Full MSAA only for still frames (render-on-demand): off while moving keeps orbiting fluid.
+    const moving = this.interacting;
+    if (moving !== this.wasMoving) { this.wasMoving = moving; this.post.setMotion(moving); if (!moving) this.invalidate(); }
     const dirty = this.dirty > 0;
     if (this.frameHandler?.frame(this, dirty, this.interacting)) { this.dirty = 0; this.listeners.frame.forEach((f) => f()); return; }
     if (!dirty) return;

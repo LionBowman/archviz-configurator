@@ -95,12 +95,25 @@ export class Post {
     this.saturation.saturation = s.saturation;
   }
 
+  private moving = false;
+
+  /** Called by the viewer: drop MSAA while the camera/scene is moving, restore it for the still frame. */
+  setMotion(moving: boolean) {
+    this.moving = moving;
+    this.applyMsaa();
+  }
+
+  private applyMsaa() {
+    const c = this.composer;
+    const msaa = this.moving ? 0 : Math.min(this.settings.msaa, c.getRenderer().capabilities.maxSamples);
+    if (c.multisampling !== msaa) c.multisampling = msaa;
+  }
+
   /** Recreate the pass chain after toggles. */
   rebuild() {
     const s = this.settings;
     const c = this.composer;
-    const msaa = Math.min(s.msaa, c.getRenderer().capabilities.maxSamples); // e.g. 8× isn't available everywhere
-    if (c.multisampling !== msaa) c.multisampling = msaa;
+    this.applyMsaa(); // clamps to the device maximum (8× isn't available everywhere)
     this.applyParams();
     c.removeAllPasses();
     c.addPass(new RenderPass(this.scene, this.camera));
